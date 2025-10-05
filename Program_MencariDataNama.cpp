@@ -1,82 +1,48 @@
-#include <iostream>
 #include <algorithm>
 #include <string>
+#include <iostream>
 using namespace std;
-
-void tukar(string *x, string *y)
-{
-    string z = *x;
-    *x = *y;
-    *y = z;
-}
 
 int main()
 {
-    int n;
-    string pilih;
-    bool looping = true;
+    const int x = 5;
+    string data[x];
+    string target;
+    int i = 0;
+    int flag = 0;
 
-    cout << "Masukkan jumlah Nama yang ingin disimpan: ";
-    cin >> n;
-
-    string arr[n];
-
-    cout << "Masukkan Nama yang akan disimpan: " << endl;
-    for (int i = 0; i < n; i++)
+    cout << "Masukan data Nama Yang ingin disimpan pada Array :" << endl;
+    for (int i = 0; i < x - 1; i++)
     {
         cout << i + 1 << ". ";
-        getline(cin >> ws, arr[i]);
-        transform(arr[i].begin(), arr[i].end(), arr[i].begin(), ::toupper);
+        cin >> data[i];
+        transform(data[i].begin(), data[i].end(), data[i].begin(), ::toupper);
     }
 
-    cout << "Data nama yang telah disimpan: " << endl;
-    for (int i = 0; i < n; i++)
+    cout << "Masukkan nama yang ingin dicari : ";
+    cin >> target;
+    transform(target.begin(), target.end(), target.begin(), ::toupper);
+
+    data[x - 1] = target;
+
+    while (data[i] != target)
     {
-        cout << i + 1 << ". " << arr[i] << " ";
-        cout << endl;
+        i++;
     }
 
-    while (looping)
+    if (i < x)
     {
-        cout << "Urutkan data nama (A-Z)? (Ya/Tidak): " << endl;
-        cin >> pilih;
-
-        if (pilih == "Ya" || pilih == "ya" || pilih == "YA")
-        {
-            for (int i = 0; i < n - 1; i++)
-            {
-                for (int j = i + 1; j < n; j++)
-                {
-                    if (arr[i] > arr[j])
-                    {
-                        tukar(&arr[i], &arr[j]);
-                    }
-                }
-            }
-
-            cout << "Nama setelah di urutkan (A-Z): " << endl;
-            for (int i = 0; i < n; i++)
-            {
-                cout << i + 1 << ". " << arr[i] << " ";
-                cout << endl;
-            }
-            looping = false;
-        }
-        else if (pilih == "Tidak" || pilih == "tidak" || pilih == "TIDAK")
-        {
-            cout << "Nama tidak di urutkan : " << endl;
-            for (int i = 0; i < n; i++)
-            {
-                cout << i + 1 << ". ";
-                cout << arr[i] << " ";
-                cout << endl;
-            }
-            looping = false;
-        }
-        else
-        {
-            cout << "Pilihan tidak valid" << endl;
-        }
+        flag = 1;
     }
+
+    if (flag == 1)
+    {
+        cout << "Nama " << target << " Ditemukan pada indeks ke-" << i << endl;
+    }
+    else
+    {
+        cout << "Nama " << target << " Tidak ditemukan" << endl;
+    }
+
     return 0;
 }

@@ -67,6 +67,14 @@ void display()
     }
     cout << '\n';
 }
+void isClear()
+{
+    while (!isEmpty())
+    {
+        dequeue();
+    }
+    cout << "Semua Antrian Telah Mengambil Makanan Bergizi Gratis";
+}
 int main()
 {
     int pilih;
@@ -105,5 +113,6 @@ int main()
             break;
         }
     } while (pilih != 5);
+    isClear();
     return 0;
 }
